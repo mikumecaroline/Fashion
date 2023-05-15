@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "50028227658",
+    "project_id": "fashion-design-7e013",
+    "storage_bucket": "fashion-design-7e013.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50028227658:android:ac57651e84ead1e1524ab3",
+        "android_client_info": {
+          "package_name": "com.example.fashiondesign"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50028227658-9qol8jepcb51hiuc1c1pfqaavjqjc0o4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnJCuHwCmtJCW-7DIB_VW96hFDkYVsBEk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50028227658-9qol8jepcb51hiuc1c1pfqaavjqjc0o4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
