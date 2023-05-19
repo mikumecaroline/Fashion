@@ -8,21 +8,23 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import kotlin.math.log
 
 class RegisterActivity : AppCompatActivity() {
-    lateinit var firstname: EditText
-    lateinit var lastname: EditText
+    lateinit var fullname: EditText
     lateinit var email: EditText
     lateinit var password: EditText
     lateinit var confirm: EditText
     lateinit var create: Button
 
+    //initialize firebase
     lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        firstname = findViewById(R.id.edtfirst)
-        lastname = findViewById(R.id.edtlast)
+
+        fullname = findViewById(R.id.edtfirst)
         email = findViewById(R.id.edt_email)
         password = findViewById(R.id.edt_password)
         confirm = findViewById(R.id.edtconfirm)
@@ -33,23 +35,24 @@ class RegisterActivity : AppCompatActivity() {
 
         confirm.inputType=InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
 
-
         create.setOnClickListener {
-            var first = firstname.text.toString().trim()
-            var last = lastname.text.toString().trim()
+            var name = fullname.text.toString().trim()
             var email = email.text.toString().trim()
             var password = password.text.toString().trim()
 
             //validate inputs
-            if (first.isEmpty() || last.isEmpty() || email.isEmpty() || password.isEmpty()) {
+            if (name.isEmpty () ||  email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "One of the field is empty", Toast.LENGTH_SHORT).show()
             } else {
-                auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) {
+                //create a user in firebase
+                auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this) {
+
                     if (it.isSuccessful) {
-                        Toast.makeText(this, "User Created Successfuly", Toast.LENGTH_SHORT).show()
-                        var gotologin = Intent(this, LoginActivity::class.java)
+                        Toast.makeText(this, "User Created Successfully", Toast.LENGTH_SHORT).show()
+                        var gotologin = Intent(this,LoginActivity::class.java)
+                        startActivity(gotologin)
                         finish()
-                    } else {
+                    } else{
                         Toast.makeText(this, "Failed to create account", Toast.LENGTH_SHORT).show()
                     }
                 }

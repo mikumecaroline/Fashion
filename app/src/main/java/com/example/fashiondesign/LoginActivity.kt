@@ -16,16 +16,18 @@ class LoginActivity : AppCompatActivity() {
     lateinit var password:EditText
     lateinit var login:Button
     lateinit var register:Button
+
     //initialise firebase
     lateinit var auth: FirebaseAuth
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
         email = findViewById(R.id.edtEmail)
         password = findViewById(R.id.edtPassword)
         login = findViewById(R.id.btnlogin)
         register = findViewById(R.id.btnreg)
+
 
         auth = FirebaseAuth.getInstance()
 
@@ -33,28 +35,33 @@ class LoginActivity : AppCompatActivity() {
         var showpassword = findViewById<Switch>(R.id.switch1)
 
         login.setOnClickListener {
-            var email = email.text.toString().trim()
-            var password = password.text.toString().trim()
+            var mail = email.text.toString().trim()
+            var pass = password.text.toString().trim()
+        }
 
-            //validate edittexts
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Cannot Submit an Empty form", Toast.LENGTH_SHORT).show()
-                }else{
-                    auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this){
-                        if (it.isSuccessful){
-                            Toast.makeText(this, "Login Successfull", Toast.LENGTH_SHORT).show()
 
-                            var  gotomain = Intent(this, MainActivity::class.java)
-                            startActivity(gotomain)
-                            finish()
-                        }else{
-                            Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
-                        }
+            login.setOnClickListener {
+            var mail = email.text.toString().trim()
+            var pass = password.text.toString().trim()
+
+                //validate input
+            if (mail.isEmpty() || pass.isEmpty()){
+                Toast.makeText(this, "One of the inputs is empty", Toast.LENGTH_SHORT).show()
+            }else{
+                auth.signInWithEmailAndPassword(mail, pass).addOnCompleteListener(this){
+                    if (it.isSuccessful){
+                        Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
+                        var gotomain = Intent(this, MainActivity::class.java)
+                        startActivity(gotomain)
+                        finish()
+                    }else{
+                        Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
                     }
                 }
-
-
             }
+
+        }
+
         showpassword.setOnCheckedChangeListener{
             _,isChecked->
             if (isChecked){
